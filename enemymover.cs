@@ -18,7 +18,6 @@ public class enemymover : MonoBehaviour
     void OnEnable()
     {
         ReturnToStart();
-        
         RecalculatePath(true);
     }
     void Awake()
@@ -27,6 +26,7 @@ public class enemymover : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
         pathfinder = FindObjectOfType<Pathfinder>();
     }
+    //run when a tower is placed
     void RecalculatePath(bool resetPath)
     {
         Vector2Int coordinates = new Vector2Int();
@@ -48,6 +48,7 @@ public class enemymover : MonoBehaviour
     {
         transform.position = gridManager.GetPositionFromCoordinates(pathfinder.StartCoordinates);
     }
+    //activates once enemy has finishes path
     void FinishPath()
     {
         enemy.StealGold();
@@ -63,6 +64,7 @@ public class enemymover : MonoBehaviour
 
             transform.LookAt(endPosition);
 
+            //smooth movement for enemies
             while(travelPercent < 1f)
             {
                 travelPercent += Time.deltaTime * speed;
